@@ -27,6 +27,10 @@ func (srv *Service) GetMatch(superheroID, matchedSuperheroID string) (*model.Sup
 		return nil, err
 	}
 
+	if cachedSuggestion == nil {
+		return nil, nil
+	}
+
 	result := mapper.MapCacheSuggestionToResult(*cachedSuggestion)
 
 	return &result, nil
