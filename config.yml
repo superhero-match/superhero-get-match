@@ -1,5 +1,5 @@
 app:
-  port: ':4300'
+  port: ':4500'
   cert_file: './cmd/api/certificate.pem'
   key_file: './cmd/api/key.pem'
   time_format: '2006-01-02T15:04:05'

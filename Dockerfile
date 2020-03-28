@@ -42,8 +42,8 @@ WORKDIR /app
 # Use an unprivileged user.
 USER appuser
 
-# Expose port 4300.
-EXPOSE 4300 4300
+# Expose port 4500.
+EXPOSE 4500 4500
 
 # Command to run the executable.
 CMD ["./main"]

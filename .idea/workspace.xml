@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aba914c4-d882-4609-a433-c542a40a3bd5" name="Default Changelist" comment="" />
+    <list default="true" id="aba914c4-d882-4609-a433-c542a40a3bd5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/api/service/cache.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/api/service/cache.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/config/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/app.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="GOROOT" path="C:\Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1ZOMdWfU7xQZb3VHkZ3uLleway1" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -20,6 +30,12 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -47,21 +63,21 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="23" key="#Go_Modules_(vgo)/0.0.1366.728@0.0.1366.728" timestamp="1584705891663" />
-    <state width="1323" height="158" key="GridCell.Tab.0.bottom" timestamp="1584706558056">
+    <state width="1323" height="304" key="GridCell.Tab.0.bottom" timestamp="1585403842765">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="158" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584706558056" />
-    <state width="1323" height="158" key="GridCell.Tab.0.center" timestamp="1584706558055">
+    <state width="1323" height="304" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1585403842765" />
+    <state width="1323" height="304" key="GridCell.Tab.0.center" timestamp="1585403842761">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="158" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584706558055" />
-    <state width="1323" height="158" key="GridCell.Tab.0.left" timestamp="1584706558055">
+    <state width="1323" height="304" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1585403842761" />
+    <state width="1323" height="304" key="GridCell.Tab.0.left" timestamp="1585403842761">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="158" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584706558055" />
-    <state width="1323" height="158" key="GridCell.Tab.0.right" timestamp="1584706558055">
+    <state width="1323" height="304" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1585403842761" />
+    <state width="1323" height="304" key="GridCell.Tab.0.right" timestamp="1585403842762">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="158" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584706558055" />
+    <state width="1323" height="304" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1585403842762" />
   </component>
 </project>
