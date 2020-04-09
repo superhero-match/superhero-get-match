@@ -11,41 +11,17 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package main
+package controller
 
 import (
-	"github.com/superhero-match/superhero-get-match/cmd/api/controller"
-	"github.com/superhero-match/superhero-get-match/internal/config"
-	"github.com/superhero-match/superhero-get-match/internal/health"
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"os"
 )
 
-func main() {
-	cfg, err := config.NewConfig()
-	if err != nil {
-		panic(err)
-	}
-
-	client := health.NewClient(cfg)
-
-	ctrl, err := controller.NewController(cfg)
-	if err != nil {
-		_ = client.ShutdownHealthServer()
-
-		panic(err)
-	}
-
-	r := ctrl.RegisterRoutes()
-
-	err = r.RunTLS(
-		cfg.App.Port,
-		cfg.App.CertFile,
-		cfg.App.KeyFile,
-	)
-	if err != nil {
-		_ = client.ShutdownHealthServer()
-
-		panic(err)
-	}
-
-	_ = client.ShutdownHealthServer()
+// Shutdown is called and panics when API server panics so that Health controller would not be responding and
+// loadbalancer would mark API server un-healthy and spin-up a new instance of API server.
+func (ctl *Controller) Shutdown(c *gin.Context) {
+	c.Status(http.StatusOK)
+	os.Exit(2)
 }

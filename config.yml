@@ -20,3 +20,8 @@ cache:
   minimum_idle_connections: 10
   maximum_retries: 1
   match_key_format: 'suggestion.%s'
+
+health:
+  port: ':8170'
+  shutdown_endpoint: '/api/v1/superhero_get_match_health/shutdown'
+  content_type: 'application/json'

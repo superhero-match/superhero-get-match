@@ -11,41 +11,30 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package main
+package controller
 
 import (
-	"github.com/superhero-match/superhero-get-match/cmd/api/controller"
-	"github.com/superhero-match/superhero-get-match/internal/config"
-	"github.com/superhero-match/superhero-get-match/internal/health"
+	"github.com/gin-gonic/gin"
 )
 
-func main() {
-	cfg, err := config.NewConfig()
-	if err != nil {
-		panic(err)
-	}
+// Controller holds the Controller data.
+type Controller struct {
+}
 
-	client := health.NewClient(cfg)
+// NewController returns new controller.
+func NewController() (*Controller, error) {
+	return &Controller{}, nil
+}
 
-	ctrl, err := controller.NewController(cfg)
-	if err != nil {
-		_ = client.ShutdownHealthServer()
+// RegisterRoutes registers all the superhero_suggestions API routes.
+func (ctl *Controller) RegisterRoutes() *gin.Engine {
+	router := gin.Default()
 
-		panic(err)
-	}
+	sr := router.Group("/api/v1/superhero_get_match_health")
 
-	r := ctrl.RegisterRoutes()
+	// Routes.
+	sr.POST("/health", ctl.Health)
+	sr.POST("/shutdown", ctl.Shutdown)
 
-	err = r.RunTLS(
-		cfg.App.Port,
-		cfg.App.CertFile,
-		cfg.App.KeyFile,
-	)
-	if err != nil {
-		_ = client.ShutdownHealthServer()
-
-		panic(err)
-	}
-
-	_ = client.ShutdownHealthServer()
+	return router
 }

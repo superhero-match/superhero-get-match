@@ -1,11 +1,5 @@
 prepare:
-	go get -u github.com/golang/dep/cmd/dep
-	go get -u github.com/gin-gonic/gin
-	go get -u golang.org/x/sys/unix
-	go get -u github.com/jinzhu/configor
-	go get -u go.uber.org/zap
-	go get -u github.com/segmentio/kafka-go
-	go get -u golang.org/x/net/context
+	go mod download
 
 run:
 	go build -o bin/main cmd/api/main.go
@@ -15,19 +9,16 @@ build:
 	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o bin/main cmd/api/main.go
 	chmod +x bin/main
 
-deps:
-	dep ensure -v
-
 dkb:
-	docker build -t superhero-match .
+	docker build -t superhero-get-match .
 
 dkr:
-	docker run --rm -p "4200:4200" superhero-match
+	docker run -p "4500:4500" -p "8170:8170" superhero-get-match
 
 launch: dkb dkr
 
 api-log:
-	docker logs superhero-match -f
+	docker logs superhero-get-match -f
 
 es-log:
 	docker logs es -f
@@ -41,7 +32,7 @@ rmi:
 clear: rmc rmi
 
 api-ssh:
-	docker exec -it superhero-match /bin/bash
+	docker exec -it superhero-get-match /bin/bash
 
 es-ssh:
 	docker exec -it es /bin/bash

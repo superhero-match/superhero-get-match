@@ -11,41 +11,19 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package main
+package health
 
 import (
-	"github.com/superhero-match/superhero-get-match/cmd/api/controller"
-	"github.com/superhero-match/superhero-get-match/internal/config"
-	"github.com/superhero-match/superhero-get-match/internal/health"
+	"net/http"
 )
 
-func main() {
-	cfg, err := config.NewConfig()
+// ShutdownHealthServer sends shutdown signal to health server. This shutdown signal is sent only when API server
+// is panicking and is about to be shutdown to notify loadbalancer that API is un-healthy.
+func (c *Client) ShutdownHealthServer () error {
+	_, err := http.Post(c.HealthServerURL, c.ContentType, nil)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
-	client := health.NewClient(cfg)
-
-	ctrl, err := controller.NewController(cfg)
-	if err != nil {
-		_ = client.ShutdownHealthServer()
-
-		panic(err)
-	}
-
-	r := ctrl.RegisterRoutes()
-
-	err = r.RunTLS(
-		cfg.App.Port,
-		cfg.App.CertFile,
-		cfg.App.KeyFile,
-	)
-	if err != nil {
-		_ = client.ShutdownHealthServer()
-
-		panic(err)
-	}
-
-	_ = client.ShutdownHealthServer()
+	return nil
 }
