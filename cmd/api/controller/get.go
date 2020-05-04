@@ -62,7 +62,7 @@ func (ctl *Controller) GetMatch(c *gin.Context) {
 	superhero, err := ctl.Service.GetESSuggestion(req.MatchedSuperheroID)
 	if checkGetError(err, c) {
 		ctl.Service.Logger.Error(
-			"failed while executing service.GetMatch()",
+			"failed while executing service.GetESSuggestion()",
 			zap.String("err", err.Error()),
 			zap.String("time", time.Now().UTC().Format(ctl.Service.TimeFormat)),
 		)
