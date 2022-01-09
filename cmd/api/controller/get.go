@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2019 - 2021 MWSOFT
+  Copyright (C) 2019 - 2022 MWSOFT
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -14,6 +14,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -29,22 +30,22 @@ func (ctl *Controller) GetMatch(c *gin.Context) {
 
 	err := c.BindJSON(&req)
 	if checkGetError(err, c) {
-		ctl.Service.Logger.Error(
+		ctl.Logger.Error(
 			"failed to bind JSON to value of type GetRequest",
 			zap.String("err", err.Error()),
-			zap.String("time", time.Now().UTC().Format(ctl.Service.TimeFormat)),
+			zap.String("time", time.Now().UTC().Format(ctl.TimeFormat)),
 		)
 
 		return
 	}
 
 	// Get Superhero from Cache, if empty, get from Elasticsearch.
-	result, err := ctl.Service.GetMatch(req.SuperheroID, req.MatchedSuperheroID)
+	result, err := ctl.Service.GetMatch(fmt.Sprintf(ctl.MatchKeyFormat, req.MatchedSuperheroID))
 	if checkGetError(err, c) {
-		ctl.Service.Logger.Error(
+		ctl.Logger.Error(
 			"failed while executing service.GetMatch()",
 			zap.String("err", err.Error()),
-			zap.String("time", time.Now().UTC().Format(ctl.Service.TimeFormat)),
+			zap.String("time", time.Now().UTC().Format(ctl.TimeFormat)),
 		)
 
 		return
@@ -53,7 +54,7 @@ func (ctl *Controller) GetMatch(c *gin.Context) {
 	if result != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"status": http.StatusOK,
-			"match": result,
+			"match":  result,
 		})
 
 		return
@@ -61,10 +62,10 @@ func (ctl *Controller) GetMatch(c *gin.Context) {
 
 	superhero, err := ctl.Service.GetESSuggestion(req.MatchedSuperheroID)
 	if checkGetError(err, c) {
-		ctl.Service.Logger.Error(
+		ctl.Logger.Error(
 			"failed while executing service.GetESSuggestion()",
 			zap.String("err", err.Error()),
-			zap.String("time", time.Now().UTC().Format(ctl.Service.TimeFormat)),
+			zap.String("time", time.Now().UTC().Format(ctl.TimeFormat)),
 		)
 
 		return
@@ -72,7 +73,7 @@ func (ctl *Controller) GetMatch(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": http.StatusOK,
-		"match": superhero,
+		"match":  superhero,
 	})
 }
 
@@ -80,7 +81,7 @@ func checkGetError(err error, c *gin.Context) bool {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"status": http.StatusInternalServerError,
-			"match": nil,
+			"match":  nil,
 		})
 
 		return true

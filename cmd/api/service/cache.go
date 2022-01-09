@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2019 - 2021 MWSOFT
+  Copyright (C) 2019 - 2022 MWSOFT
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -14,15 +14,13 @@
 package service
 
 import (
-	"fmt"
-
 	"github.com/superhero-match/superhero-get-match/cmd/api/model"
 	"github.com/superhero-match/superhero-get-match/cmd/api/service/mapper"
 )
 
-// GetCachedSuggestion fetches suggestion from cache and maps it into result.
-func (srv *Service) GetMatch(superheroID, matchedSuperheroID string) (*model.Superhero, error) {
-	cachedSuggestion, err := srv.Cache.GetMatch(fmt.Sprintf(srv.Cache.MatchKeyFormat, matchedSuperheroID))
+// GetMatch fetches matched user from cache.
+func (srv *service) GetMatch(key string) (*model.Superhero, error) {
+	cachedSuggestion, err := srv.Cache.GetMatch(key)
 	if err != nil {
 		return nil, err
 	}

@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2019 - 2021 MWSOFT
+  Copyright (C) 2019 - 2022 MWSOFT
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -18,16 +18,16 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/superhero-match/superhero-get-match/internal/es/model"
+	elastic "github.com/olivere/elastic/v7"
 
-	"github.com/olivere/elastic/v7"
+	"github.com/superhero-match/superhero-get-match/internal/es/model"
 )
 
 // GetSuggestion retrieves single Superhero.
 // This method is going to be used to fetch a single Superhero when displaying
 // suggestion profile. This method will be only called if that suggestion is not going to be
 // found in Cache.
-func (es *ES) GetSuggestion(superheroID string) (superhero *model.Superhero, err error) {
+func (es *es) GetSuggestion(superheroID string) (superhero *model.Superhero, err error) {
 	fmt.Println(superheroID)
 	fmt.Println(es.Index)
 

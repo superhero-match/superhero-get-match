@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2019 - 2021 MWSOFT
+  Copyright (C) 2019 - 2022 MWSOFT
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -14,11 +14,11 @@
 package service
 
 import (
-	ctrl "github.com/superhero-match/superhero-match/cmd/api/model"
+	ctrl "github.com/superhero-match/superhero-get-match/cmd/api/model"
 )
 
 // GetESSuggestion fetches suggestions from Elasticsearch.
-func (srv *Service) GetESSuggestion(superheroID string) (*ctrl.Superhero, error) {
+func (srv *service) GetESSuggestion(superheroID string) (*ctrl.Superhero, error) {
 	s, err := srv.ES.GetSuggestion(superheroID)
 	if err != nil {
 		return nil, err

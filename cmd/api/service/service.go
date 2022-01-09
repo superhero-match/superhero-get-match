@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2019 - 2021 MWSOFT
+  Copyright (C) 2019 - 2022 MWSOFT
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -14,27 +14,26 @@
 package service
 
 import (
+	apim "github.com/superhero-match/superhero-get-match/cmd/api/model"
 	"github.com/superhero-match/superhero-get-match/internal/cache"
 	"github.com/superhero-match/superhero-get-match/internal/config"
 	"github.com/superhero-match/superhero-get-match/internal/es"
-	"go.uber.org/zap"
 )
 
-// Service holds all the different services that are used when handling request.
-type Service struct {
-	Cache      *cache.Cache
-	ES         *es.ES
-	Logger     *zap.Logger
-	TimeFormat string
+// Service interface defines service methods.
+type Service interface {
+	GetMatch(key string) (*apim.Superhero, error)
+	GetESSuggestion(superheroID string) (*apim.Superhero, error)
+}
+
+// service holds all the different services that are used when handling request.
+type service struct {
+	Cache cache.Cache
+	ES    es.ES
 }
 
 // NewService creates value of type Service.
-func NewService(cfg *config.Config) (*Service, error) {
-	logger, err := zap.NewProduction()
-	if err != nil {
-		return nil, err
-	}
-
+func NewService(cfg *config.Config) (Service, error) {
 	e, err := es.NewES(cfg)
 	if err != nil {
 		return nil, err
@@ -45,12 +44,8 @@ func NewService(cfg *config.Config) (*Service, error) {
 		return nil, err
 	}
 
-	defer logger.Sync()
-
-	return &Service{
-		Cache:      ch,
-		ES:         e,
-		Logger:     logger,
-		TimeFormat: cfg.App.TimeFormat,
+	return &service{
+		Cache: ch,
+		ES:    e,
 	}, nil
 }
